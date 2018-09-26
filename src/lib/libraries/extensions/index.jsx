@@ -8,6 +8,7 @@ import translateImage from './translate.png';
 import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
+import boostImage from './boost.png';
 
 import microbitDeviceImage from './device-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './device-connection/microbit/microbit-small.svg';
@@ -169,6 +170,34 @@ export default [
                 defaultMessage="Connecting"
                 description="Message to help people connect to their WeDo."
                 id="gui.extension.wedo2.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/wedo'
+
+    },
+    {
+        name: 'LEGO Powered Up',
+        extensionId: 'poweredup',
+        iconURL: boostImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Build with motors and sensors."
+                description="Description for the 'LEGO Powered Up' extension"
+                id="gui.extension.poweredup.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        launchDeviceConnectionFlow: true,
+        useAutoScan: true,
+        deviceImage: wedoDeviceImage,
+        smallDeviceImage: wedoMenuImage,
+        deviceButtonImage: wedoButtonImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their Powered Up."
+                id="gui.extension.poweredup.connectingMessage"
             />
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
