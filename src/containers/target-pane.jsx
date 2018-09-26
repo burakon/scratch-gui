@@ -2,7 +2,6 @@ import bindAll from 'lodash.bindall';
 import React from 'react';
 
 import {connect} from 'react-redux';
-import {intlShape, injectIntl} from 'react-intl';
 
 import {
     openSpriteLibrary,
@@ -16,8 +15,6 @@ import DragConstants from '../lib/drag-constants';
 import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 import spriteLibraryContent from '../lib/libraries/sprites.json';
 import {handleFileUpload, spriteUpload} from '../lib/file-uploader.js';
-import sharedMessages from '../lib/shared-messages';
-import {emptySprite} from '../lib/empty-assets';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -112,17 +109,15 @@ class TargetPane extends React.Component {
         this.props.vm.addSprite(JSON.stringify(item.json));
     }
     handlePaintSpriteClick () {
-        const formatMessage = this.props.intl.formatMessage;
-        const emptyItem = emptySprite(
-            formatMessage(sharedMessages.sprite, {index: 1}),
-            formatMessage(sharedMessages.pop),
-            formatMessage(sharedMessages.costume, {index: 1})
-        );
-        this.props.vm.addSprite(JSON.stringify(emptyItem)).then(() => {
-            setTimeout(() => { // Wait for targets update to propagate before tab switching
-                this.props.onActivateTab(COSTUMES_TAB_INDEX);
+        // @todo this is brittle, will need to be refactored for localized libraries
+        const emptyItem = spriteLibraryContent.find(item => item.name === 'Empty');
+        if (emptyItem) {
+            this.props.vm.addSprite(JSON.stringify(emptyItem.json)).then(() => {
+                setTimeout(() => { // Wait for targets update to propagate before tab switching
+                    this.props.onActivateTab(COSTUMES_TAB_INDEX);
+                });
             });
-        });
+        }
     }
     handleNewSprite (spriteJSONString) {
         this.props.vm.addSprite(spriteJSONString);
@@ -132,9 +127,8 @@ class TargetPane extends React.Component {
     }
     handleSpriteUpload (e) {
         const storage = this.props.vm.runtime.storage;
-        const costumeSuffix = this.props.intl.formatMessage(sharedMessages.costume, {index: 1});
         handleFileUpload(e.target, (buffer, fileType, fileName) => {
-            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite, costumeSuffix);
+            spriteUpload(buffer, fileType, fileName, storage, this.handleNewSprite);
         });
     }
     setFileInput (input) {
@@ -221,7 +215,6 @@ const {
 } = TargetPaneComponent.propTypes;
 
 TargetPane.propTypes = {
-    intl: intlShape.isRequired,
     ...targetPaneProps
 };
 
@@ -260,7 +253,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default injectIntl(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TargetPane));
+)(TargetPane);

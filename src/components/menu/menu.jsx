@@ -32,7 +32,6 @@ MenuComponent.propTypes = {
     place: PropTypes.oneOf(['left', 'right'])
 };
 
-
 const MenuItem = ({
     children,
     className,
@@ -51,7 +50,6 @@ MenuItem.propTypes = {
     className: PropTypes.string,
     onClick: PropTypes.func
 };
-
 
 const addDividerClassToFirstChild = (child, id) => (
     React.cloneElement(child, {

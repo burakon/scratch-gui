@@ -6,6 +6,8 @@ import {connect} from 'react-redux';
 import tabletFullScreen from '../lib/tablet-full-screen';
 
 import PreviewModalComponent from '../components/preview-modal/preview-modal.jsx';
+import BrowserModalComponent from '../components/browser-modal/browser-modal.jsx';
+import supportedBrowser from '../lib/supported-browser';
 
 import {
     closePreviewInfo,
@@ -25,6 +27,25 @@ class PreviewModal extends React.Component {
             previewing: false
         };
     }
+
+    /**
+     * Conditionally returns an intro modal depending on the hideIntro prop
+     * @returns { React.Component | null } null if hideIntro is true, the intro modal component otherwise
+     */
+    introIfShown () {
+        if (this.props.hideIntro) {
+            return null; // If hideIntro is true, the intro modal should not appear
+        }
+
+        // otherwise, show the intro modal
+        return (<PreviewModalComponent
+            isRtl={this.props.isRtl}
+            previewing={this.state.previewing}
+            onCancel={this.handleCancel}
+            onTryIt={this.handleTryIt}
+            onViewProject={this.handleViewProject}
+        />);
+    }
     handleTryIt () {
         this.setState({previewing: true});
         // try to run in fullscreen mode on tablets.
@@ -38,19 +59,18 @@ class PreviewModal extends React.Component {
         this.props.onViewProject();
     }
     render () {
-        return (
-            <PreviewModalComponent
+        return (supportedBrowser() ?
+            this.introIfShown() :
+            <BrowserModalComponent
                 isRtl={this.props.isRtl}
-                previewing={this.state.previewing}
-                onCancel={this.handleCancel}
-                onTryIt={this.handleTryIt}
-                onViewProject={this.handleViewProject}
+                onBack={this.handleCancel}
             />
         );
     }
 }
 
 PreviewModal.propTypes = {
+    hideIntro: PropTypes.bool,
     isRtl: PropTypes.bool,
     onTryIt: PropTypes.func,
     onViewProject: PropTypes.func

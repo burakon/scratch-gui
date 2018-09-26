@@ -12,7 +12,7 @@ class TagButton extends React.Component {
         ]);
     }
     handleClick () {
-        this.props.onClick(this.props.tag);
+        this.props.onClick(this.props.title);
     }
     render () {
         return (
@@ -26,7 +26,11 @@ class TagButton extends React.Component {
 
 TagButton.propTypes = {
     ...TagButtonComponent.propTypes,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]).isRequired
 };
 
 export default TagButton;

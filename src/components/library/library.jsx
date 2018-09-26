@@ -13,21 +13,16 @@ import analytics from '../../lib/analytics';
 
 import styles from './library.css';
 
+const ALL_TAG_TITLE = 'All';
+const tagListPrefix = [{title: ALL_TAG_TITLE}];
+
 const messages = defineMessages({
     filterPlaceholder: {
         id: 'gui.library.filterPlaceholder',
         defaultMessage: 'Search',
         description: 'Placeholder text for library search field'
-    },
-    allTag: {
-        id: 'gui.library.allTag',
-        defaultMessage: 'All',
-        description: 'Label for library tag to revert to all items after filtering by tag.'
     }
 });
-
-const ALL_TAG = {tag: 'all', intlLabel: messages.allTag};
-const tagListPrefix = [ALL_TAG];
 
 class LibraryComponent extends React.Component {
     constructor (props) {
@@ -47,7 +42,7 @@ class LibraryComponent extends React.Component {
         this.state = {
             selectedItem: null,
             filterQuery: '',
-            selectedTag: ALL_TAG.tag
+            selectedTag: ALL_TAG_TITLE.toLowerCase()
         };
     }
     componentDidUpdate (prevProps, prevState) {
@@ -85,7 +80,7 @@ class LibraryComponent extends React.Component {
     handleFilterChange (event) {
         this.setState({
             filterQuery: event.target.value,
-            selectedTag: ALL_TAG.tag
+            selectedTag: ALL_TAG_TITLE.toLowerCase()
         });
     }
     handleFilterClear () {
@@ -146,7 +141,7 @@ class LibraryComponent extends React.Component {
                             <div className={styles.tagWrapper}>
                                 {tagListPrefix.concat(this.props.tags).map((tagProps, id) => (
                                     <TagButton
-                                        active={this.state.selectedTag === tagProps.tag.toLowerCase()}
+                                        active={this.state.selectedTag === tagProps.title.toLowerCase()}
                                         className={classNames(
                                             styles.filterBarItem,
                                             styles.tagButton,

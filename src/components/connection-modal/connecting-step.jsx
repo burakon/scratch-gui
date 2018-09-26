@@ -14,10 +14,10 @@ const ConnectingStep = props => (
     <Box className={styles.body}>
         <Box className={styles.activityArea}>
             <Box className={styles.centeredRow}>
-                <div className={styles.peripheralActivity}>
+                <div className={styles.deviceActivity}>
                     <img
-                        className={styles.peripheralActivityIcon}
-                        src={props.peripheralImage}
+                        className={styles.deviceActivityIcon}
+                        src={props.deviceImage}
                     />
                     <img
                         className={styles.bluetoothConnectingIcon}
@@ -61,8 +61,8 @@ const ConnectingStep = props => (
 
 ConnectingStep.propTypes = {
     connectingMessage: PropTypes.node.isRequired,
-    onDisconnect: PropTypes.func,
-    peripheralImage: PropTypes.string.isRequired
+    deviceImage: PropTypes.string.isRequired,
+    onDisconnect: PropTypes.func
 };
 
 export default ConnectingStep;

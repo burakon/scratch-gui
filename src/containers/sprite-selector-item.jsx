@@ -32,17 +32,7 @@ class SpriteSelectorItem extends React.Component {
         ]);
         this.svgRenderer = new SVGRenderer();
         // Asset ID of the SVG currently in SVGRenderer
-        this.decodedAssetId = null;
-    }
-    shouldComponentUpdate (nextProps) {
-        // Ignore dragPayload due to https://github.com/LLK/scratch-gui/issues/3172.
-        // This function should be removed once the issue is fixed.
-        for (const property in nextProps) {
-            if (property !== 'dragPayload' && this.props[property] !== nextProps[property]) {
-                return true;
-            }
-        }
-        return false;
+        this.svgRendererAssetId = null;
     }
     getCostumeUrl () {
         if (this.props.costumeURL) return this.props.costumeURL;
@@ -54,20 +44,18 @@ class SpriteSelectorItem extends React.Component {
         // Avoid parsing the SVG when possible, since it's expensive.
         if (asset.assetType === storage.AssetType.ImageVector) {
             // If the asset ID has not changed, no need to re-parse
-            if (this.decodedAssetId === this.props.assetId) {
-                // @todo consider caching more than one URL.
+            if (this.svgRendererAssetId === this.props.assetId) {
                 return this.cachedUrl;
             }
-            this.decodedAssetId = this.props.assetId;
+
             const svgString = this.props.vm.runtime.storage.get(this.props.assetId).decodeText();
             if (svgString.match(HAS_FONT_REGEXP)) {
+                this.svgRendererAssetId = this.props.assetId;
                 this.svgRenderer.loadString(svgString);
                 const svgText = this.svgRenderer.toString(true /* shouldInjectFonts */);
                 this.cachedUrl = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
-            } else {
-                this.cachedUrl = this.props.vm.runtime.storage.get(this.props.assetId).encodeDataURI();
+                return this.cachedUrl;
             }
-            return this.cachedUrl;
         }
         return this.props.vm.runtime.storage.get(this.props.assetId).encodeDataURI();
     }

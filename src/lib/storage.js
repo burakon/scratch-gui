@@ -1,6 +1,6 @@
 import ScratchStorage from 'scratch-storage';
 
-import defaultProject from './default-project';
+import defaultProjectAssets from './default-project';
 
 /**
  * Wrapper for ScratchStorage which adds default web sources.
@@ -9,7 +9,12 @@ import defaultProject from './default-project';
 class Storage extends ScratchStorage {
     constructor () {
         super();
-        this.cacheDefaultProject();
+        defaultProjectAssets.forEach(asset => this.cache(
+            this.AssetType[asset.assetType],
+            this.DataFormat[asset.dataFormat],
+            asset.data,
+            asset.id
+        ));
         this.addWebStore(
             [this.AssetType.Project],
             this.getProjectGetConfig.bind(this),
@@ -48,19 +53,6 @@ class Storage extends ScratchStorage {
     }
     getAssetGetConfig (asset) {
         return `${this.assetHost}/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
-    }
-    setTranslatorFunction (translator) {
-        this.translator = translator;
-        this.cacheDefaultProject();
-    }
-    cacheDefaultProject () {
-        const defaultProjectAssets = defaultProject(this.translator);
-        defaultProjectAssets.forEach(asset => this.cache(
-            this.AssetType[asset.assetType],
-            this.DataFormat[asset.dataFormat],
-            asset.data,
-            asset.id
-        ));
     }
 }
 

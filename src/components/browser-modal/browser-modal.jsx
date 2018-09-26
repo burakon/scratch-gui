@@ -84,8 +84,4 @@ BrowserModal.propTypes = {
     onBack: PropTypes.func.isRequired
 };
 
-const WrappedBrowserModal = injectIntl(BrowserModal);
-
-WrappedBrowserModal.setAppElement = ReactModal.setAppElement;
-
-export default WrappedBrowserModal;
+export default injectIntl(BrowserModal);

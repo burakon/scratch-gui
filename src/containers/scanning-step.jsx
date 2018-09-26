@@ -14,18 +14,18 @@ class ScanningStep extends React.Component {
         ]);
         this.state = {
             scanning: true,
-            peripheralList: []
+            deviceList: []
         };
     }
     componentDidMount () {
-        this.props.vm.scanForPeripheral(this.props.extensionId);
+        this.props.vm.startDeviceScan(this.props.extensionId);
         this.props.vm.on(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
         this.props.vm.on(
             'PERIPHERAL_SCAN_TIMEOUT', this.handlePeripheralScanTimeout);
     }
     componentWillUnmount () {
-        // @todo: stop the peripheral scan here
+        // @todo: stop the device scan here
         this.props.vm.removeListener(
             'PERIPHERAL_LIST_UPDATE', this.handlePeripheralListUpdate);
         this.props.vm.removeListener(
@@ -34,7 +34,7 @@ class ScanningStep extends React.Component {
     handlePeripheralScanTimeout () {
         this.setState({
             scanning: false,
-            peripheralList: []
+            deviceList: []
         });
     }
     handlePeripheralListUpdate (newList) {
@@ -42,22 +42,22 @@ class ScanningStep extends React.Component {
         const peripheralArray = Object.keys(newList).map(id =>
             newList[id]
         );
-        this.setState({peripheralList: peripheralArray});
+        this.setState({deviceList: peripheralArray});
     }
     handleRefresh () {
-        this.props.vm.scanForPeripheral(this.props.extensionId);
+        this.props.vm.startDeviceScan(this.props.extensionId);
         this.setState({
             scanning: true,
-            peripheralList: []
+            deviceList: []
         });
     }
     render () {
         return (
             <ScanningStepComponent
-                peripheralList={this.state.peripheralList}
+                deviceList={this.state.deviceList}
                 phase={this.state.phase}
                 scanning={this.state.scanning}
-                smallPeripheralImage={this.props.smallPeripheralImage}
+                smallDeviceImage={this.props.smallDeviceImage}
                 title={this.props.extensionId}
                 onConnected={this.props.onConnected}
                 onConnecting={this.props.onConnecting}
@@ -71,7 +71,7 @@ ScanningStep.propTypes = {
     extensionId: PropTypes.string.isRequired,
     onConnected: PropTypes.func.isRequired,
     onConnecting: PropTypes.func.isRequired,
-    smallPeripheralImage: PropTypes.string,
+    smallDeviceImage: PropTypes.string,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

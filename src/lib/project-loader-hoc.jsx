@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {injectIntl, intlShape} from 'react-intl';
 
 import {setProjectId} from '../reducers/project-id';
 
@@ -25,7 +24,6 @@ const ProjectLoaderHOC = function (WrappedComponent) {
             };
             storage.setProjectHost(props.projectHost);
             storage.setAssetHost(props.assetHost);
-            storage.setTranslatorFunction(props.intl.formatMessage);
             props.setProjectId(props.projectId);
             if (
                 props.projectId !== '' &&
@@ -74,6 +72,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
                 assetHost,
                 projectHost,
                 projectId,
+                reduxProjectId,
                 setProjectId: setProjectIdProp,
                 /* eslint-enable no-unused-vars */
                 ...componentProps
@@ -90,7 +89,6 @@ const ProjectLoaderHOC = function (WrappedComponent) {
     }
     ProjectLoaderComponent.propTypes = {
         assetHost: PropTypes.string,
-        intl: intlShape.isRequired,
         projectHost: PropTypes.string,
         projectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func
@@ -107,7 +105,7 @@ const ProjectLoaderHOC = function (WrappedComponent) {
         setProjectId: id => dispatch(setProjectId(id))
     });
 
-    return injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProjectLoaderComponent));
+    return connect(mapStateToProps, mapDispatchToProps)(ProjectLoaderComponent);
 };
 
 export {

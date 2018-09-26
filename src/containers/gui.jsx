@@ -7,7 +7,6 @@ import ReactModal from 'react-modal';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
-import {setProjectTitle} from '../reducers/project-title';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,
@@ -35,10 +34,6 @@ class GUI extends React.Component {
         };
     }
     componentDidMount () {
-        if (this.props.projectTitle) {
-            this.props.onUpdateReduxProjectTitle(this.props.projectTitle);
-        }
-
         if (this.props.vm.initialized) return;
         this.audioEngine = new AudioEngine();
         this.props.vm.attachAudioEngine(this.audioEngine);
@@ -70,9 +65,6 @@ class GUI extends React.Component {
                     });
             });
         }
-        if (this.props.projectTitle !== nextProps.projectTitle) {
-            this.props.onUpdateReduxProjectTitle(nextProps.projectTitle);
-        }
     }
     render () {
         if (this.state.loadingError) {
@@ -80,17 +72,10 @@ class GUI extends React.Component {
                 `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
         }
         const {
-            /* eslint-disable no-unused-vars */
-            assetHost,
-            hideIntro,
-            onUpdateReduxProjectTitle,
-            projectData,
-            projectHost,
-            projectTitle,
-            /* eslint-enable no-unused-vars */
             children,
             fetchingProject,
             loadingStateVisible,
+            projectData, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
@@ -107,25 +92,18 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    assetHost: PropTypes.string,
     children: PropTypes.node,
     fetchingProject: PropTypes.bool,
-    hideIntro: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
-    onUpdateReduxProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    projectHost: PropTypes.string,
-    projectTitle: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
-    alertsVisible: state.scratchGui.alerts.visible,
     backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
     blocksTabVisible: state.scratchGui.editorTab.activeTabIndex === BLOCKS_TAB_INDEX,
     cardsVisible: state.scratchGui.cards.visible,
@@ -135,7 +113,7 @@ const mapStateToProps = (state, ownProps) => ({
     isPlayerOnly: state.scratchGui.mode.isPlayerOnly,
     isRtl: state.locales.isRtl,
     loadingStateVisible: state.scratchGui.modals.loadingProject,
-    previewInfoVisible: state.scratchGui.modals.previewInfo && !ownProps.hideIntro,
+    previewInfoVisible: state.scratchGui.modals.previewInfo,
     targetIsStage: (
         state.scratchGui.targets.stage &&
         state.scratchGui.targets.stage.id === state.scratchGui.targets.editingTarget
@@ -150,8 +128,7 @@ const mapDispatchToProps = dispatch => ({
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
-    onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
-    onUpdateReduxProjectTitle: title => dispatch(setProjectTitle(title))
+    onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary())
 });
 
 const ConnectedGUI = connect(

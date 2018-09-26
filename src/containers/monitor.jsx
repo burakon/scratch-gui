@@ -7,7 +7,6 @@ import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx'
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
 
 import {connect} from 'react-redux';
-import VM from 'scratch-vm';
 
 const availableModes = opcode => (
     monitorModes.filter(t => {
@@ -148,14 +147,12 @@ Monitor.propTypes = {
             PropTypes.number
         ]))
     ]), // eslint-disable-line react/no-unused-prop-types
-    vm: PropTypes.instanceOf(VM),
     width: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number
 };
 const mapStateToProps = state => ({
-    monitorLayout: state.scratchGui.monitorLayout,
-    vm: state.scratchGui.vm
+    monitorLayout: state.scratchGui.monitorLayout
 });
 const mapDispatchToProps = dispatch => ({
     addMonitorRect: (id, rect, savePosition) =>

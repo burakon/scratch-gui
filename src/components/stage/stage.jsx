@@ -7,7 +7,6 @@ import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';
 import Question from '../../containers/question.jsx';
-import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {getStageDimensions} from '../../lib/screen-utils.js';
 import styles from './stage.css';
@@ -19,7 +18,6 @@ const StageComponent = props => {
         isColorPicking,
         isFullScreen,
         colorInfo,
-        micIndicator,
         question,
         stageSize,
         useEditorDragStyle,
@@ -68,22 +66,13 @@ const StageComponent = props => {
                         <Loupe colorInfo={colorInfo} />
                     </Box>
                 ) : null}
-                <div
-                    className={styles.stageBottomWrapper}
-                    style={{
-                        width: stageDimensions.width,
-                        height: stageDimensions.height,
-                        left: '50%',
-                        marginLeft: stageDimensions.width * -0.5
-                    }}
-                >
-                    {micIndicator ? (
-                        <MicIndicator
-                            className={styles.micIndicator}
-                            stageSize={stageDimensions}
-                        />
-                    ) : null}
-                    {question === null ? null : (
+                {question === null ? null : (
+                    <div
+                        className={classNames(
+                            styles.stageOverlayContent,
+                            styles.stageOverlayContentBorderOverride
+                        )}
+                    >
                         <div
                             className={styles.questionWrapper}
                             style={{width: stageDimensions.width}}
@@ -93,8 +82,8 @@ const StageComponent = props => {
                                 onQuestionAnswered={onQuestionAnswered}
                             />
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
                 <canvas
                     className={styles.draggingSprite}
                     height={0}

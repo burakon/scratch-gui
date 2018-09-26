@@ -7,7 +7,7 @@ import Box from '../box/box.jsx';
 
 import styles from './connection-modal.css';
 
-class PeripheralTile extends React.Component {
+class DeviceTile extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -19,26 +19,26 @@ class PeripheralTile extends React.Component {
     }
     render () {
         return (
-            <Box className={styles.peripheralTile}>
-                <Box className={styles.peripheralTileName}>
+            <Box className={styles.deviceTile}>
+                <Box className={styles.deviceTileName}>
                     <img
-                        className={styles.peripheralTileImage}
-                        src={this.props.smallPeripheralImage}
+                        className={styles.deviceTileImage}
+                        src={this.props.smallDeviceImage}
                     />
-                    <Box className={styles.peripheralTileNameWrapper}>
-                        <Box className={styles.peripheralTileNameLabel}>
+                    <Box className={styles.deviceTileNameWrapper}>
+                        <Box className={styles.deviceTileNameLabel}>
                             <FormattedMessage
                                 defaultMessage="Device name"
                                 description="Label for field showing the device name"
-                                id="gui.connection.peripheral-name-label"
+                                id="gui.connection.device-name-label"
                             />
                         </Box>
-                        <Box className={styles.peripheralTileNameText}>
+                        <Box className={styles.deviceTileNameText}>
                             {this.props.name}
                         </Box>
                     </Box>
                 </Box>
-                <Box className={styles.peripheralTileWidgets}>
+                <Box className={styles.deviceTileWidgets}>
                     <Box className={styles.signalStrengthMeter}>
                         <div
                             className={classNames(styles.signalBar, {
@@ -76,12 +76,12 @@ class PeripheralTile extends React.Component {
     }
 }
 
-PeripheralTile.propTypes = {
+DeviceTile.propTypes = {
     name: PropTypes.string,
     onConnecting: PropTypes.func,
     peripheralId: PropTypes.string,
     rssi: PropTypes.number,
-    smallPeripheralImage: PropTypes.string
+    smallDeviceImage: PropTypes.string
 };
 
-export default PeripheralTile;
+export default DeviceTile;
