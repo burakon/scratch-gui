@@ -8,7 +8,7 @@ import translateImage from './translate.png';
 import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
-import poweredupImage from './boost.png';
+import poweredupImage from './poweredup.png';
 
 import microbitPeripheralImage from './peripheral-connection/microbit/microbit-illustration.svg';
 import microbitMenuImage from './peripheral-connection/microbit/microbit-small.svg';
@@ -176,7 +176,7 @@ export default [
 
     },
     {
-        name: 'LEGO Powered Up',
+        name: 'LEGO Powered Up + Sensors',
         extensionId: 'poweredup',
         iconURL: poweredupImage,
         description: (
