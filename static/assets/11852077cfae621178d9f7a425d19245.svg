@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>duplo-train-small</title>
+    <desc>Created with Sketch.</desc>
+    <g id="duplo-train-small" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(4.000000, 7.500000)">
+            <path d="M14.5,3.5 L1.5,3.5 L1.5,18 L30.5,18 L30.5,14 L14.5,14 L14.5,3.5 Z" id="Combined-Shape" stroke="#B60B00" fill="#FF0F00"></path>
+            <rect id="Rectangle-Copy-3" stroke="#C1B300" fill="#FFEC00" x="0.5" y="1.5" width="15" height="2"></rect>
+            <circle id="Oval" stroke="#7C87A5" fill="#E7E8E8" cx="8" cy="21.5" r="3.5"></circle>
+            <circle id="Oval-Copy" stroke="#7C87A5" fill="#E7E8E8" cx="24" cy="21.5" r="3.5"></circle>
+            <rect id="Rectangle-Copy-7" stroke="#B60B00" fill="#FF0F00" x="14.5" y="6" width="15" height="8" rx="1"></rect>
+            <rect id="Rectangle-Copy-9" stroke="#B60B00" fill="#FF0F00" transform="translate(19.500000, 5.250000) scale(1, -1) translate(-19.500000, -5.250000) " x="17.5" y="4.5" width="4" height="1.5" rx="0.75"></rect>
+            <rect id="Rectangle-Copy-11" stroke="#B60B00" fill="#FF0F00" transform="translate(27.500000, 3.500000) scale(1, -1) translate(-27.500000, -3.500000) " x="26.5" y="3.5" width="2" height="1"></rect>
+            <path d="M26.3385165,4.5 L25.7385165,6 L29.2614835,6 L28.6614835,4.5 L26.3385165,4.5 Z" id="Rectangle-Copy-10" stroke="#B60B00" fill="#FF0F00" transform="translate(27.500000, 5.250000) scale(1, -1) translate(-27.500000, -5.250000) "></path>
+            <rect id="Rectangle-Copy-8" stroke="#B60B00" fill="#ACFFF6" x="5" y="6" width="6" height="6"></rect>
+            <rect id="Rectangle-Copy-5" stroke="#C1B300" x="2" y="0.5" width="2" height="1"></rect>
+            <rect id="Rectangle-Copy-6" stroke="#C1B300" x="6" y="0.5" width="2" height="1"></rect>
+            <path d="M0.5,18 C0.5,18.3399722 0.5,18.4818706 0.5,19.0000045 C0.5,20.9328102 2.06684853,22.4996587 3.99966135,22.4996587 L28.0000044,22.5000045 C29.9330025,22.5000045 31.5000063,20.9330008 31.5000044,19.0000033 C31.5000048,18.482522 31.5000049,18.3411392 31.5000052,18 C17.9842709,18 17.6489815,18 0.5,18 Z" id="Rectangle-Copy" stroke="#7C87A5" fill="#33322E"></path>
+            <rect id="Rectangle" fill="#E7E8E8" x="27" y="19.5" width="5" height="1"></rect>
+        </g>
+    </g>
+</svg>
