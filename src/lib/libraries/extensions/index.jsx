@@ -12,6 +12,8 @@ import translateInsetImage from './translate-small.png';
 import microbitImage from './microbit.png';
 import ev3Image from './ev3.png';
 import wedoImage from './wedo.png';
+import poweredUpImage from './powered-up.png';
+import duploTrainImage from './duplo-train.png';
 import text2speechImage from './text2speech.png';
 import text2speechInsetImage from './text2speech-small.svg';
 import makeymakeyImage from './makeymakey.png';
@@ -24,6 +26,12 @@ import ev3MenuImage from './peripheral-connection/ev3/ev3-small.svg';
 import wedoPeripheralImage from './peripheral-connection/wedo/wedo-illustration.svg';
 import wedoMenuImage from './peripheral-connection/wedo/wedo-small.svg';
 import wedoButtonImage from './peripheral-connection/wedo/wedo-button-illustration.svg';
+import poweredUpPeripheralImage from './peripheral-connection/powered-up/powered-up-illustration.svg';
+import poweredUpMenuImage from './peripheral-connection/powered-up/powered-up-small.svg';
+import poweredUpButtonImage from './peripheral-connection/powered-up/powered-up-button-illustration.svg';
+import duploTrainPeripheralImage from './peripheral-connection/duplo-train/duplo-train-illustration.svg';
+import duploTrainMenuImage from './peripheral-connection/duplo-train/duplo-train-small.svg';
+import duploTrainButtonImage from './peripheral-connection/duplo-train/duplo-train-button-illustration.svg';
 
 export default [
     {
@@ -229,6 +237,66 @@ export default [
                 defaultMessage="Connecting"
                 description="Message to help people connect to their WeDo."
                 id="gui.extension.wedo2.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/wedo'
+
+    },
+    {
+        name: 'LEGO Powered Up + Sensors',
+        extensionId: 'poweredUp',
+        iconURL: poweredUpImage,
+        insetIconURL: poweredUpMenuImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Build with motors and sensors."
+                description="Description for the 'LEGO Powered Up' extension"
+                id="gui.extension.poweredUp.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: true,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: true,
+        peripheralImage: poweredUpPeripheralImage,
+        smallPeripheralImage: poweredUpMenuImage,
+        peripheralButtonImage: poweredUpButtonImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their Powered Up."
+                id="gui.extension.poweredUp.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/wedo'
+
+    },
+    {
+        name: 'LEGO Duplo Train',
+        extensionId: 'duploTrain',
+        iconURL: duploTrainImage,
+        insetIconURL: duploTrainMenuImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Build and control your train."
+                description="Description for the 'LEGO Duplo Train' extension"
+                id="gui.extension.duploTrain.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: true,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: true,
+        peripheralImage: duploTrainPeripheralImage,
+        smallPeripheralImage: duploTrainMenuImage,
+        peripheralButtonImage: duploTrainButtonImage,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their Duplo Train."
+                id="gui.extension.duploTrain.connectingMessage"
             />
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
